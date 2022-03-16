@@ -1,5 +1,7 @@
 from scipy.integrate import solve_ivp
 import numpy as np
+import matplotlib.pyplot as plt
+
 t_m=100
 timepts=10000
 x=np.zeros(t_m)
@@ -21,3 +23,6 @@ L_sol=solve_ivp(Lorenz_cont,(0,t_m),(x[0], y[0], z[0]),args=(sigma,rho,beta),den
 
 t = np.linspace(0, t_m, timepts)
 x,y,z = L_sol.sol(t)
+
+plt.plot(t, z.T)
+plt.show()
