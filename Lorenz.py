@@ -1,6 +1,8 @@
 from scipy.integrate import solve_ivp
 import numpy as np
 import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+
 
 t_m=100
 timepts=10000
@@ -24,5 +26,18 @@ L_sol=solve_ivp(Lorenz_cont,(0,t_m),(x[0], y[0], z[0]),args=(sigma,rho,beta),den
 t = np.linspace(0, t_m, timepts)
 x,y,z = L_sol.sol(t)
 
-plt.plot(t, z.T)
+
+
+
+fig = plt.figure()
+ax = fig.gca(projection='3d')
+ax.set_facecolor('k')
+
+s=15
+cmap = plt.cm.cool
+
+for i in range(0,timepts-s,s):
+    ax.plot(x[i:i+s+1], y[i:i+s+1], z[i:i+s+1], color=cmap(i/timepts), alpha=0.4)
+
+ax.set_axis_off()
 plt.show()
